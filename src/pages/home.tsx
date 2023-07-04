@@ -62,6 +62,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+      <section className="bg-neutral-100">
+
+      </section>
     </main>
   )
 }

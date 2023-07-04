@@ -1,8 +1,4 @@
-import React from 'react'
-
-type Props = {}
-
-const TeamSingle = (props: Props) => {
+const TeamSingle = () => {
   return (
     <div>TeamSingle</div>
   )

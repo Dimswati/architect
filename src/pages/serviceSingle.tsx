@@ -1,8 +1,5 @@
-import React from 'react'
 
-type Props = {}
-
-const ServiceSingle = (props: Props) => {
+const ServiceSingle = () => {
   return (
     <div>ServiceSingle</div>
   )

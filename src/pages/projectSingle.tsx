@@ -1,8 +1,5 @@
-import React from 'react'
 
-type Props = {}
-
-const ProjectSingle = (props: Props) => {
+const ProjectSingle = () => {
   return (
     <div>ProjectSingle</div>
   )

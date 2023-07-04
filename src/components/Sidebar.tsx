@@ -1,8 +1,5 @@
-import React from 'react'
 
-type Props = {}
-
-const Sidebar = (props: Props) => {
+const Sidebar = () => {
   return (
     <div>Sidebar</div>
   )
