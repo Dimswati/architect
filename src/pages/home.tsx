@@ -2,7 +2,6 @@ import Button from "../components/Button"
 import { FcOk, FcBusinessman, FcIdea } from "react-icons/fc"
 import { FaCaretRight } from 'react-icons/fa'
 import { GiPaintRoller } from 'react-icons/gi'
-import { SlLink } from 'react-icons/sl'
 
 import { Link } from "react-router-dom"
 
@@ -11,10 +10,12 @@ import { useFilters } from "../hooks/useProjectsByTag"
 
 import { useState } from 'react'
 import Project from "../components/Project"
+import { twMerge } from "tailwind-merge"
 
 const Home = () => {
   const [ filterTag, setFilterTag ] = useState<string>('painting')
-  const tags = useFilters()
+
+  const { tags } = useFilters()
 
   const { projectsByTag } = useProjectsByTag(filterTag)
 
@@ -160,7 +161,7 @@ const Home = () => {
             <ul className="lg:basis-2/12 flex lg:flex-col flex-row gap-x-3 gap-y-3 flex-wrap">
               {
                 tags.map(tag => (
-                  <li key={tag} className="uppercase font-semibold py-3 border border-neutral-300 hover:border-orange-500 text-center px-6 lg:px-0">
+                  <li key={tag} className={twMerge("uppercase font-semibold py-3 border border-neutral-300 hover:border-orange-500 text-center px-6 lg:px-0 cursor-pointer", tag === filterTag ? 'bg-orange-500 text-white border-orange-500' : '')} onClick={()=>setFilterTag(tag)}>
                     {tag}
                   </li>
                 ))

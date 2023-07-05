@@ -13,7 +13,9 @@ export const useFilters = () => {
 
   const uniqueTags = [...new Set(tags)]
 
-  return uniqueTags
+  return {
+    tags: uniqueTags
+  }
 }
 
 const useProjectsByTag = ( filterTag: string ) => {
