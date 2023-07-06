@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+[type='text'],
+[type='password'],
+[type='email'],
+[type='number'],
+[type='url'],
+[type='date'],
+[type='datetime-local'],
+[type='month'],
+[type='week'],
+[type='time'],
+[type='search'],
+[type='tel'],
+[type='checkbox'],
+[type='radio'],
+[multiple],
+textarea,
+select {
+    @apply shadow-sm bg-neutral-100 focus:outline-none border-none focus:ring-1 focus:ring-orange-500 w-full text-neutral-700 focus:bg-white
+}
+
+[type='text'],
+[type='email'],
+[type='tel'],
+select {
+    @apply py-3
+}
+

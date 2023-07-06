@@ -2,11 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, redirect, RouterProvider } from 'react-router-dom'
 
 import MainLayout from './components/MainLayout'
 
 import Home from './pages/home'
+
 import Team from './pages/team'
 import Projects from './pages/projects'
 import Services from './pages/services'
@@ -24,7 +25,13 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home/>
+        element: <Home/>,
+        action: async({ request })=>{
+          const formData = await request.formData()
+          const data = Object.fromEntries(formData)
+          console.log(data)
+          return redirect(`/quotation`)
+        }
       },
       {
         path: 'team',
@@ -58,6 +65,10 @@ const router = createBrowserRouter([
       },
       {
         path: 'contact',
+        element: <Contact/>
+      },
+      {
+        path: 'quotation',
         element: <Contact/>
       }
     ]

@@ -1,25 +1,38 @@
-import Button from "../components/Button"
 import { FcOk, FcBusinessman, FcIdea } from "react-icons/fc"
-import { FaCaretRight } from 'react-icons/fa'
+import { FaCaretRight, FaQuoteLeft, FaAngleRight, FaAngleLeft } from 'react-icons/fa'
 import { GiPaintRoller } from 'react-icons/gi'
 
 import { Link } from "react-router-dom"
-
 import useProjectsByTag from "../hooks/useProjectsByTag"
-import { useFilters } from "../hooks/useProjectsByTag"
 
-import { useState } from 'react'
-import Project from "../components/Project"
+import { useState, useRef } from 'react'
 import { twMerge } from "tailwind-merge"
+
+import Project from "../components/Project"
+import Button from "../components/Button"
+import QuotationForm from "../components/QuotationForm"
+import Testimonial from "../components/Testimonial"
+
+// import Swiper core and required modules
+import { A11y, Autoplay } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { type Swiper as SwiperRef } from "swiper/types"
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/bundle';
+import useTestimonials from "../hooks/useTestimonials"
+import useClients from "../hooks/useClients"
+import Client from "../components/Client"
 
 const Home = () => {
   const [ filterTag, setFilterTag ] = useState<string>('painting')
+  const { projects, tags } = useProjectsByTag(filterTag)
 
-  const { tags } = useFilters()
+  const { clients } = useClients()
+  const swiperRef = useRef<SwiperRef>()
 
-  const { projectsByTag } = useProjectsByTag(filterTag)
-
-  console.log(projectsByTag)
+  const { testimonials } = useTestimonials()
 
   return (
     <main>
@@ -169,8 +182,8 @@ const Home = () => {
             </ul>
             <div className="lg:basis-10/12 basis-full grid grid-cols-1 md:grid-cols-2 gap-4">
               {
-                projectsByTag.map(project => (
-                  <Project {...project} />
+                projects.map(project => (
+                  <Project key={project.id} {...project} updateFilter={setFilterTag}/>
                 ))
               }
             </div>
@@ -190,8 +203,133 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="bg-white">
+      <section className="bg-white py-24">
+        <div className="container flex lg:flex-row flex-col-reverse gap-x-6 gap-y-12">
+          <div className="flex-1">
+            <span className="text-orange-500 italic text-lg mb-4">Decorators</span>
+            <h2 className="mb-16 text-4xl font-bold relative before:absolute before:w-16 before:h-0.5 before:-bottom-5 before:bg-orange-400 after:absolute after:w-20 after:h-1 after:bg-orange-400 after:-bottom-7 after:left-0">What you will get</h2>
+            <p className="text-neutral-700 mb-6">All this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the ut actual teachings of the great explorer of the truth the master-builder of human happiness.</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-6 gap-8">
+              <div className="transition flex gap-x-4 group">
+                <div className="text-4xl text-neutral-800 group-hover:bg-orange-500 group-hover:text-white bg-neutral-100 w-fit h-fit p-2">
+                    <GiPaintRoller/>
+                </div>
+                <div className="flex flex-col gap-y-2">
+                  <h4 className="text-2xl font-bold text-neutral-800 group-hover:text-orange-600">Free Land Survey</h4>
+                  <p className="text-neutral-600 font-normal">How all this mistaken idea pleasure and praising pain was born and will give you a ...</p>
+                </div>
+              </div>
+              <div className="transition flex gap-x-4 group">
+                <div className="text-4xl text-neutral-800 group-hover:bg-orange-500 group-hover:text-white bg-neutral-100 w-fit h-fit p-2">
+                    <GiPaintRoller/>
+                </div>
+                <div className="flex flex-col gap-y-2">
+                  <h4 className="text-2xl font-bold text-neutral-800 group-hover:text-orange-600">Dark Furnitures</h4>
+                  <p className="text-neutral-600 font-normal">How all this mistaken idea pleasure and praising pain was born and will give you a ...</p>
+                </div>
+              </div>
+              <div className="transition flex gap-x-4 group">
+                <div className="text-4xl text-neutral-800 group-hover:bg-orange-500 group-hover:text-white bg-neutral-100 w-fit h-fit p-2">
+                    <GiPaintRoller/>
+                </div>
+                <div className="flex flex-col gap-y-2">
+                  <h4 className="text-2xl font-bold text-neutral-800 group-hover:text-orange-600">Fabrics Pattern</h4>
+                  <p className="text-neutral-600 font-normal">How all this mistaken idea pleasure and praising pain was born and will give you a ...</p>
+                </div>
+              </div>
+              <div className="transition flex gap-x-4 group">
+                <div className="text-4xl text-neutral-800 group-hover:bg-orange-500 group-hover:text-white bg-neutral-100 w-fit h-fit p-2">
+                    <GiPaintRoller/>
+                </div>
+                <div className="flex flex-col gap-y-2">
+                  <h4 className="text-2xl font-bold text-neutral-800 group-hover:text-orange-600">Concrete Floor</h4>
+                  <p className="text-neutral-600 font-normal">How all this mistaken idea pleasure and praising pain was born and will give you a ...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex-1">
+            <span className="text-orange-500 italic text-lg mb-4">Request for</span>
+            <h2 className="mb-16 text-4xl font-bold relative before:absolute before:w-16 before:h-0.5 before:-bottom-5 before:bg-orange-400 after:absolute after:w-20 after:h-1 after:bg-orange-400 after:-bottom-7 after:left-0">Free Quotation</h2>
+            <QuotationForm/>
+          </div>
+        </div>
+      </section>
+      <section className="bg-[url(http://a.ourhtmldemo.com/decorators/wp-content/uploads/2019/02/image-1-1.jpg)] bg-center bg-cover bg-fixed bg-neutral-800 bg-blend-overlay py-24 relative">
+        <Swiper
+        // install Swiper modules
+        modules={[Autoplay ,A11y]}
+        loop={true}
+        spaceBetween={50}
+        slidesPerView={1}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false
+        }}
+        onInit={(swiper) => {
+          swiperRef.current = swiper
+        }}
+        // onSlideChange={() => console.log('slide change')}
+        className="relative"
+        >
+          <div className="flex justify-center mb-12" slot="container-start">
+              <div className="text-lg text-white p-3 border-2 border-white rounded-full">
+                <FaQuoteLeft/>
+              </div>
+          </div>
+          
+          {
+            testimonials.map(testimonial => (
+              <SwiperSlide key={testimonial.id}>
+                <Testimonial key={testimonial.id} {...testimonial}/>
+              </SwiperSlide>
+            ))
+          }
+          <div slot="container-end" className="container lg:max-w-[70vw] flex justify-between absolute bottom-20 inset-x-0 text-neutral-100 text-xl z-50">
+            <div className="p-3 border bg-transparent border-neutral-200 hover:bg-orange-500 cursor-pointer" onClick={()=>swiperRef.current?.slidePrev()}>
+              <FaAngleLeft/>
+            </div>
+            <div className="p-3 border bg-transparent border-neutral-200 hover:bg-orange-500 cursor-pointer" onClick={()=>swiperRef.current?.slideNext()}>
+              <FaAngleRight/>
+            </div>
+          </div>
+        </Swiper>
+      </section>
+      <section className="bg-neutral-100 py-20">
         <div className="container">
+        <Swiper
+            modules={[Autoplay ,A11y]}
+            freeMode={true}
+            loop={true}
+            spaceBetween={50}
+            // slidesPerView={}'
+            breakpoints={{
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 20
+              },
+              768: {
+                slidesPerView: 3,
+                spaceBetween: 30
+              },
+              1024: {
+                slidesPerView: 4,
+                spaceBetween: 40
+              }
+            }}
+            autoplay={{
+              delay: 2000,
+              disableOnInteraction: false
+            }}
+          >
+            {
+              clients.map(client => (
+                <SwiperSlide key={client.id}>
+                  <Client key={client.id} {...client}/>
+                </SwiperSlide>
+              ))
+            }
+          </Swiper>
         </div>
       </section>
     </main>
