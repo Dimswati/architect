@@ -19,9 +19,24 @@ type Client = {
     imageUrl: string;
 }
 
+type TeamMember = {
+    id: number;
+    name: string;
+    imageUrl: string;
+    position: string;
+    description: string;
+}
+
 type HomeSlider = {
     id: number
     imageUrl: string
     title: string
     subTitle: string
+}
+
+type Service = {
+    id: number;
+    service: string;
+    imageUrl: string;
+    description: string;
 }

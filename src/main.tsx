@@ -35,8 +35,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'team',
-        element: <Team/>,
         children: [
+          {
+            index: true,
+            element: <Team/>
+          },
           {
             path: ':memberId',
             element: <TeamSingle/>
