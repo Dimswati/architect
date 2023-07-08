@@ -1,14 +1,13 @@
 import { SlLink } from "react-icons/sl"
 
 interface ProjectProps extends Project {
-  updateFilter: React.Dispatch<React.SetStateAction<string>>
+  updateFilter?: React.Dispatch<React.SetStateAction<string>>
 }
 
 const Project = ({
     title,
     tags,
     imageUrl,
-    updateFilter
 }: ProjectProps) => {
   return (
     <div className=" h-fit group transition ease-in-out duration-300">
@@ -24,7 +23,7 @@ const Project = ({
         <h4 className="text-xl font-bold text-neutral-800">{title}</h4>
         <ul className="flex gap-x-3">
           {
-              tags.map(tag => (<li key={tag} onClick={()=>updateFilter(tag)} className="text-orange-500 italic cursor-pointer">{tag}</li>))
+              tags.map(tag => (<li key={tag} className="text-orange-500 italic">{tag}</li>))
           }
         </ul>
       </div>
