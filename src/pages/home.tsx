@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"
 import useProjectsByTag from "../hooks/useProjectsByTag"
 
 import { useState, useRef } from 'react'
-import { twMerge } from "tailwind-merge"
+import { twJoin, twMerge } from "tailwind-merge"
 
 import Project from "../components/Project"
 import Button from "../components/Button"
@@ -14,7 +14,7 @@ import QuotationForm from "../components/QuotationForm"
 import Testimonial from "../components/Testimonial"
 
 // import Swiper core and required modules
-import { A11y, Autoplay } from 'swiper/modules';
+import { Autoplay, EffectCoverflow, Pagination, Navigation, EffectFade, Parallax } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { type Swiper as SwiperRef } from "swiper/types"
 
@@ -25,34 +25,59 @@ import useTestimonials from "../hooks/useTestimonials"
 import useClients from "../hooks/useClients"
 import Client from "../components/Client"
 
+// Import Home Slider
+import homeSlides from "../lib/homeSlides"
+import HomeSlider from "../components/HomeSlider"
+
 const Home = () => {
   const [ filterTag, setFilterTag ] = useState<string>('painting')
   const { projects, tags } = useProjectsByTag(filterTag)
 
   const { clients } = useClients()
-  const swiperRef = useRef<SwiperRef>()
+
+  const testimonialRef = useRef<SwiperRef>()
+  const homeSliderRef = useRef<SwiperRef>()
 
   const { testimonials } = useTestimonials()
 
   return (
     <main>
-      <section className='h-screen bg-[url(https://images.adsttc.com/media/images/61e8/13e7/c4b6/b501/6400/a8c6/large_jpg/bloco-arquitetos-06.jpg?1642599414)] bg-scroll bg-center bg-cover bg-no-repeat bg-neutral-600/90 bg-blend-overlay'>
-        <div className="container flex flex-col gap-y-6 md:gap-y-8 lg:gap-y-10 justify-center h-full">
-          <h1 className="lg:w-[50%] w-full text-5xl md:text-6xl lg:text-7xl text-white font-bold">Decorators design studio</h1>
-          <p className="lg:w-[50%] w-full text-2xl font-bold text-white">Decorating Decorators brings 20 years of experience right to your home or office</p>
-          <div className="flex sm:gap-x-6 sm:flex-row flex-col gap-y-6">
-            <Button className="text-sm text-white font-medium uppercase px-6 py-3">
-              our services
-            </Button>
-            <Button className="text-sm font-medium uppercase px-6 py-3 bg-neutral-800 text-white">
-              our projects
-            </Button>
+      <Swiper
+      modules={[ Autoplay, Parallax ]}
+      speed={800}
+      parallax={true}
+      spaceBetween={0}
+      slidesPerView={1}
+      grabCursor={true}
+      loop={true}
+      centeredSlides={true}
+      autoplay={{
+        delay: 5000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true
+      }}
+      onInit={(swiper)=>{
+        homeSliderRef.current = swiper
+      }}
+      >
+        {homeSlides.map(slide => (
+          <SwiperSlide key={slide.id}>
+            <HomeSlider {...slide}/>
+          </SwiperSlide>
+        ))}
+          <div slot="container-end" className="flex justify-center content-end gap-x-4 absolute bottom-20 right-20 text-neutral-100 text-xl z-50">
+            <div className="p-3 border bg-transparent border-neutral-200 hover:bg-orange-500 cursor-pointer" onClick={()=>homeSliderRef.current?.slidePrev()}>
+              <FaAngleLeft/>
+            </div>
+            <div className="p-3 border bg-transparent border-neutral-200 hover:bg-orange-500 cursor-pointer" onClick={()=>homeSliderRef.current?.slideNext()}>
+              <FaAngleRight/>
+            </div>
           </div>
-        </div>
-      </section>
+      </Swiper>
+
       <section className="bg-white pb-20">
         <div className="container flex gap-x-20 lg:flex-row flex-col">
-          <div className="flex-1 bg-neutral-900 text-white p-8 -mt-6 rounded">
+          <div className="flex-1 bg-neutral-900 text-white p-8 -mt-6 z-20 rounded">
             <h2 className="mb-12 text-3xl font-bold relative before:absolute before:w-16 before:h-0.5 before:-bottom-5 before:bg-orange-400 after:absolute after:w-20 after:h-1 after:bg-orange-400 after:-bottom-7 after:left-0">Welcome to Decorators</h2>
             <h3 className="text-2xl font-bold mb-12">We Have The Right Products to Fit Your Needs and Budget <span className="text-orange-500">Purchase - Decorators.</span></h3>
             <p className="mb-8">Explain to you how all this mistaken idea of denouncing ut pleasures work praising pain was born and will give you can complete design account sed the system, and expound the actual teachngs interiors of the great design explorer of the truth, the master-builders design of human happiness one seds rejects, dislikes, or avoids pleasures itself.</p>
@@ -258,7 +283,8 @@ const Home = () => {
       <section className="bg-[url(http://a.ourhtmldemo.com/decorators/wp-content/uploads/2019/02/image-1-1.jpg)] bg-center bg-cover bg-fixed bg-neutral-800 bg-blend-overlay py-24 relative">
         <Swiper
         // install Swiper modules
-        modules={[Autoplay ,A11y]}
+        modules={[Autoplay ]}
+        speed={500}
         loop={true}
         spaceBetween={50}
         slidesPerView={1}
@@ -267,7 +293,7 @@ const Home = () => {
           disableOnInteraction: false
         }}
         onInit={(swiper) => {
-          swiperRef.current = swiper
+          testimonialRef.current = swiper
         }}
         // onSlideChange={() => console.log('slide change')}
         className="relative"
@@ -286,10 +312,10 @@ const Home = () => {
             ))
           }
           <div slot="container-end" className="container lg:max-w-[70vw] flex justify-between absolute bottom-20 inset-x-0 text-neutral-100 text-xl z-50">
-            <div className="p-3 border bg-transparent border-neutral-200 hover:bg-orange-500 cursor-pointer" onClick={()=>swiperRef.current?.slidePrev()}>
+            <div className="p-3 border bg-transparent border-neutral-200 hover:bg-orange-500 cursor-pointer" onClick={()=>testimonialRef.current?.slidePrev()}>
               <FaAngleLeft/>
             </div>
-            <div className="p-3 border bg-transparent border-neutral-200 hover:bg-orange-500 cursor-pointer" onClick={()=>swiperRef.current?.slideNext()}>
+            <div className="p-3 border bg-transparent border-neutral-200 hover:bg-orange-500 cursor-pointer" onClick={()=>testimonialRef.current?.slideNext()}>
               <FaAngleRight/>
             </div>
           </div>
@@ -298,7 +324,7 @@ const Home = () => {
       <section className="bg-neutral-100 py-20">
         <div className="container">
         <Swiper
-            modules={[Autoplay ,A11y]}
+            modules={[Autoplay]}
             freeMode={true}
             loop={true}
             spaceBetween={50}
@@ -337,3 +363,28 @@ const Home = () => {
 }
 
 export default Home
+
+
+// learned
+// pagination={{ el: '.swiper-pagination', clickable: true }}
+//       navigation={{
+//         nextEl: 'swiper-button-next',
+//         prevEl: 'swiper-button-prev'
+//       }}
+
+      // pagination={{
+      //   el: '.swiper-pagination',
+      //   clickable: true,
+      //   renderBullet: (index, className)=>{
+      //     return `<span class=${className}></span>`;
+      //   }
+      // }}
+
+// coverflowEffect={
+      //   {
+      //     rotate: 0,
+      //     stretch: 0,
+      //     depth: 100,
+      //     modifier: 2.5
+      //   }
+      // }

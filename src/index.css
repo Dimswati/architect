@@ -29,3 +29,25 @@ select {
     @apply py-3
 }
 
+@layer base {
+    .swiper-pagination-bullet {
+
+        @apply py-2 px-4 rounded-none w-auto h-4 text-sm text-black bg-white
+        /* padding: 5px 10px;
+        border-radius: 0;
+        width: auto;
+        height: 30px;
+        text-align: center;
+        line-height: 30px;
+        font-size: 12px;
+        color:#000;
+        opacity: 1;
+        background: rgba(0,0,0,0.2); */
+    }
+
+    .swiper-pagination-bullet-active {
+        @apply text-white bg-orange-500
+        /* color:#fff;
+        background: #007aff; */
+    }
+}

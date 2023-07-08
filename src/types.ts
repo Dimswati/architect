@@ -18,3 +18,10 @@ type Client = {
     clientName: string;
     imageUrl: string;
 }
+
+type HomeSlider = {
+    id: number
+    imageUrl: string
+    title: string
+    subTitle: string
+}
