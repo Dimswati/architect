@@ -17,7 +17,6 @@ import TeamSingle from './pages/teamSingle'
 import ServiceSingle from './pages/serviceSingle'
 import ProjectSingle from './pages/projectSingle'
 
-
 const router = createBrowserRouter([
   {
     path: '/',

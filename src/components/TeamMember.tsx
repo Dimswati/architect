@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { BsArrowRight } from 'react-icons/bs'
 
 const TeamMember = ({ id, imageUrl, name, position, description }: TeamMember) => {
+  
   return (
     <div className='border border-neutral-200 transition group'>
         <img src={imageUrl} className='object-cover object-center mb-5 w-full sm:max-h-56' alt={name}/>
@@ -11,7 +12,7 @@ const TeamMember = ({ id, imageUrl, name, position, description }: TeamMember) =
             <span className='italic text-orange-600'>{position}</span>
             <p className='mt-4'>{description}</p>
             <div className='my-4 hover:text-orange-600 text-sm flex items-center gap-x-3'>
-                <Link to={id.toString()} relative='path'>View Profile</Link>
+                <Link to={`/team/${id}`} relative='path'>View Profile</Link>
                 <BsArrowRight/>
             </div>
         </div>
