@@ -174,7 +174,7 @@ const TeamSingle = () => {
             }}
           >
             {
-              services.map(service => (
+              services?.map(service => (
                 <SwiperSlide key={service.id}>
                   <div className='relative group h-32 w-full flex items-center justify-center bg-neutral-100'>
                     <div>
