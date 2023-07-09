@@ -6,8 +6,8 @@ import NavButton from './NavButton'
 
 const Navbar = () => {
   return (
-    <header>
-       <div className='py-2 bg-black text-white text-sm'>
+    <>
+       <div className='py-2 bg-black text-white text-sm sm:block hidden'>
             <div className='container flex flex-wrap-reverse gap-y-4 justify-center md:flex-nowrap  md:gap-x-10 md:justify-end'>
                 <ul className='flex md:gap-x-6 gap-x-4 md:flex-nowrap flex-wrap justify-center gap-y-3'>
                     <li className='flex gap-2 items-center'>
@@ -36,7 +36,7 @@ const Navbar = () => {
                 </div>
             </div>
        </div>
-       <nav className='md:py-8 py-7 bg-white sticky top-0 border-b border-neutral-200'>
+       <header className='md:py-8 py-7 bg-white z-50 sticky top-0 border-b border-neutral-200'>
         <div className='container justify-between items-center flex'>
             <img src="http://a.ourhtmldemo.com/decorators/wp-content/themes/decorators/images/logo.png" className='object-cover object-center md:w-48 w-40 h-auto' alt="logo" />
             <div className='md:flex lg:gap-x-4 gap-x-2 hidden'>
@@ -50,8 +50,8 @@ const Navbar = () => {
                 <AiOutlineMenu/>
             </div>
         </div>
-       </nav>
-    </header>
+       </header>
+    </>
   )
 }
 

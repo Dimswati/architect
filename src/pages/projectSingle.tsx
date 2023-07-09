@@ -1,7 +1,10 @@
+import Container from "../components/Container"
 
 const ProjectSingle = () => {
   return (
-    <div>ProjectSingle</div>
+    <Container>
+      
+    </Container>
   )
 }
 
