@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"
 import useProjectsByTag from "../hooks/useProjectsByTag"
 
 import { useState, useRef } from 'react'
-import { twJoin, twMerge } from "tailwind-merge"
+import { twMerge } from "tailwind-merge"
 
 import Project from "../components/Project"
 import Button from "../components/Button"
@@ -14,7 +14,7 @@ import QuotationForm from "../components/QuotationForm"
 import Testimonial from "../components/Testimonial"
 
 // import Swiper core and required modules
-import { Autoplay, EffectCoverflow, Pagination, Navigation, EffectFade, Parallax } from 'swiper/modules';
+import { Autoplay, Parallax } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { type Swiper as SwiperRef } from "swiper/types"
 
@@ -79,7 +79,7 @@ const Home = () => {
       </Swiper>
 
       <Container innerClasses="container flex gap-x-20 lg:flex-row flex-col">
-        <div className="flex-1 bg-neutral-900 text-white p-8 -mt-6 z-20 rounded">
+        <div className="flex-1 bg-neutral-900 text-white p-8 z-20 rounded">
             <h2 className="mb-12 text-3xl font-bold relative before:absolute before:w-16 before:h-0.5 before:-bottom-5 before:bg-orange-400 after:absolute after:w-20 after:h-1 after:bg-orange-400 after:-bottom-7 after:left-0">Welcome to Decorators</h2>
             <h3 className="text-2xl font-bold mb-12">We Have The Right Products to Fit Your Needs and Budget <span className="text-orange-500">Purchase - Decorators.</span></h3>
             <p className="mb-8">Explain to you how all this mistaken idea of denouncing ut pleasures work praising pain was born and will give you can complete design account sed the system, and expound the actual teachngs interiors of the great design explorer of the truth, the master-builders design of human happiness one seds rejects, dislikes, or avoids pleasures itself.</p>
