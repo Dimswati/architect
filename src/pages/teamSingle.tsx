@@ -48,7 +48,8 @@ const TeamSingle = () => {
   const setProject = (id: number) => dispatch({ type: REDUCER_ENUM_TYPE.SET_PROJECT, payload: { projectId: id } })
 
   useEffect(()=>{
-    setProject(projects[0].id)
+    const project = projects as Project[]
+    setProject(project[0].id)
   }, [])
 
   const serviceRef = useRef<SwiperRef>()
@@ -66,7 +67,7 @@ const TeamSingle = () => {
         <h4 className="font-bold mb-6 text-neutral-700"><span className="text-orange-600">Projects</span> by {teamMember?.name}</h4>
         <div className="grid grid-cols-1 gap-3">
           {
-            projects.map(project => (
+            projects?.map(project => (
               <div key={project.id} className='border border-neutral-200 transition-all duration-300'>
                 <div className='px-4 py-4 flex gap-x-4 items-center hover:bg-neutral-100 cursor-pointer transition' onClick={()=>setProject(project.id)}>
                   <HiPlus/>
@@ -201,7 +202,7 @@ const TeamSingle = () => {
           <h2 className="mb-16 text-3xl font-bold relative before:absolute before:w-16 before:h-0.5 before:-bottom-5 before:bg-orange-400 after:absolute after:w-20 after:h-1 after:bg-orange-400 after:-bottom-7 after:left-0">Projects by {teamMember?.name}</h2>
           <div className="grid grid-cols-1 gap-3">
           {
-            projects.map(project => (
+            projects?.map(project => (
               <div key={project.id} className='border border-neutral-200 transition-all duration-300'>
                 <div className='px-4 py-4 flex gap-x-4 items-center hover:bg-neutral-100 cursor-pointer transition' onClick={()=>setProject(project.id)}>
                   <HiPlus/>

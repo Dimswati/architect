@@ -4,7 +4,12 @@ import { AiOutlineMenu } from 'react-icons/ai'
 
 import NavButton from './NavButton'
 
+import { useNavigate } from 'react-router-dom'
+
 const Navbar = () => {
+
+    const navigate = useNavigate()
+
   return (
     <>
        <div className='py-2 bg-black text-white text-sm sm:block hidden'>
@@ -38,7 +43,7 @@ const Navbar = () => {
        </div>
        <header className='md:py-8 py-7 bg-white z-50 sticky top-0 border-b border-neutral-200'>
         <div className='container justify-between items-center flex'>
-            <img src="http://a.ourhtmldemo.com/decorators/wp-content/themes/decorators/images/logo.png" className='object-cover object-center md:w-48 w-40 h-auto' alt="logo" />
+            <img onClick={()=>navigate('/')} src="http://a.ourhtmldemo.com/decorators/wp-content/themes/decorators/images/logo.png" className='object-cover object-center md:w-48 w-40 h-auto cursor-pointer' alt="logo" />
             <div className='md:flex lg:gap-x-4 gap-x-2 hidden'>
                 <NavButton path='/' pathName={'Home'}/>
                 <NavButton path='/team'  pathName={'Team'}/>
