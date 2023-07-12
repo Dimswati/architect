@@ -1,14 +1,26 @@
 import { CiMail, CiPhone, CiClock2 } from 'react-icons/ci'
 import { FaFacebookF, FaTwitter, FaLinkedinIn } from 'react-icons/fa'
-import { AiOutlineMenu } from 'react-icons/ai'
+import { GrClose } from 'react-icons/gr'
+import { SlMenu } from 'react-icons/sl'
 
 import NavButton from './NavButton'
 
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { twMerge } from 'tailwind-merge'
+
+import { useState, useEffect } from 'react'
 
 const Navbar = () => {
 
+    const [openMenu, setOpenMenu] = useState<boolean>(false)
+
     const navigate = useNavigate()
+
+    const { pathname } = useLocation()
+
+    useEffect(()=>{
+        setOpenMenu(false)
+    }, [pathname])
 
   return (
     <>
@@ -51,10 +63,33 @@ const Navbar = () => {
                 <NavButton path='/projects' pathName={'Projects'}/>
                 <NavButton path='/contact' pathName={'Contact'}/>
             </div>
-            <div className='bg-orange-500 p-3 text-white rounded md:hidden inline-block'>
-                <AiOutlineMenu/>
+            <div className='text-2xl md:hidden inline-block cursor-pointer' onClick={()=>setOpenMenu(!openMenu)}>
+                {openMenu ? (
+                    <GrClose/>
+                ): <SlMenu/>}
             </div>
         </div>
+        {openMenu && (
+        <div className='absolute bg-white top-20 md:hidden block w-full'>
+            <div id='menu' className='container flex flex-col gap-y-4 text-lg font-medium py-4'>
+                <NavLink to='.' className={({isActive})=> twMerge('px-4 py-2', isActive ? 'text-white bg-orange-500' : '')}>
+                    Home
+                </NavLink>
+                <NavLink to='team' className={({isActive})=> twMerge('px-4 py-2', isActive ? 'text-white bg-orange-500' : '')}>
+                    Team
+                </NavLink>
+                <NavLink to='services' className={({isActive})=> twMerge('px-4 py-2', isActive ? 'text-white bg-orange-500' : '')}>
+                    Services
+                </NavLink>
+                <NavLink to='projects' className={({isActive})=> twMerge('px-4 py-2', isActive ? 'text-white bg-orange-500' : '')}>
+                    Projects
+                </NavLink>
+                <NavLink to='contact' className={({isActive})=> twMerge('px-4 py-2', isActive ? 'text-white bg-orange-500' : '')}>
+                    Contact
+                </NavLink>
+            </div>
+        </div>
+        )}
        </header>
     </>
   )

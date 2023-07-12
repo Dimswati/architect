@@ -2,6 +2,7 @@ import Container from "../components/Container"
 import Button from "../components/Button"
 import useServices from "../hooks/useServices"
 import Service from "../components/Service"
+import BreadCrump from "../components/BreadCrump"
 
 const Services = () => {
 
@@ -9,6 +10,7 @@ const Services = () => {
 
   return (
     <>
+      <BreadCrump>Our services</BreadCrump>
       <Container innerClasses="container grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {
           services?.map(service => (

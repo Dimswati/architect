@@ -6,6 +6,7 @@ import useServices from "../hooks/useServices"
 
 import { BsArrowRightShort } from 'react-icons/bs'
 import { CiLocationOn, CiMail, CiPhone } from "react-icons/ci"
+import BreadCrump from "../components/BreadCrump"
 
 
 const ServiceSingle = () => {
@@ -16,6 +17,7 @@ const ServiceSingle = () => {
 
   return (
     <>
+      <BreadCrump>{service?.service}</BreadCrump>
       <Container innerClasses="container">
         <div className="flex md:flex-row flex-col gap-y-8 gap-x-8 text-neutral-700 mb-12">
           <img src={service?.imageUrl} alt={service?.service} className="flex-1"/>

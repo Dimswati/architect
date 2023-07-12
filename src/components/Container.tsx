@@ -1,4 +1,5 @@
 import React from 'react'
+import { ReactElement } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 type ContainerProps = {
@@ -7,7 +8,7 @@ type ContainerProps = {
     innerClasses?: string 
 }
 
-const Container = ({ children, innerClasses, sectionClasses }: ContainerProps) => {
+const Container = ({ children, innerClasses, sectionClasses }: ContainerProps): ReactElement => {
   return (
     <section className={twMerge(`bg-white py-20`, sectionClasses)}>
         <div className={twMerge(``, innerClasses)}>

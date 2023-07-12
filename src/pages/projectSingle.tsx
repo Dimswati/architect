@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom"
 import Container from "../components/Container"
 import useProjects from "../hooks/useProjects"
 
+import BreadCrump from "../components/BreadCrump"
+
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai' 
 
 const ProjectSingle = () => {
@@ -11,7 +13,9 @@ const ProjectSingle = () => {
   const { project } = useProjects(Number(projectId))
 
   return (
-    <Container innerClasses="container flex md:flex-row flex-col gap-x-8">
+    <>
+      <BreadCrump>{project?.title}</BreadCrump>
+      <Container innerClasses="container flex md:flex-row flex-col gap-x-8">
       <img className="flex-1" src={project?.imageUrl} alt={project?.imageUrl}/>
       <div className="flex-1">
         <h2 className="text-xl font-bold border-b py-6">{project?.title}</h2>
@@ -55,6 +59,7 @@ const ProjectSingle = () => {
         </div>
       </div>
     </Container>
+    </>
   )
 }
 

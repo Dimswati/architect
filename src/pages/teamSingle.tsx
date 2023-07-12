@@ -18,6 +18,7 @@ import useProjects from "../hooks/useProjects"
 import useServices from '../hooks/useServices'
 import Project from '../components/Project'
 import QuotationForm from '../components/QuotationForm'
+import BreadCrump from '../components/BreadCrump'
 
 const initialState = { isOpen: false, projectId: 1 }
 
@@ -62,7 +63,9 @@ const TeamSingle = () => {
   const { teamMember } = useTeam(Number(memberId))
 
   return (
-    <Container innerClasses="container flex gap-x-8">
+    <>
+      <BreadCrump>meet {teamMember?.name}</BreadCrump>
+      <Container innerClasses="container flex gap-x-8">
       <div className="lg:basis-4/12 lg:w-4/12 lg:block hidden">
         <h4 className="font-bold mb-6 text-neutral-700"><span className="text-orange-600">Projects</span> by {teamMember?.name}</h4>
         <div className="grid grid-cols-1 gap-3">
@@ -252,7 +255,8 @@ const TeamSingle = () => {
           </div>
         </div>
       </div>
-    </Container>
+      </Container>
+    </>
   )
 }
 
