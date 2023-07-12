@@ -31,6 +31,7 @@ import HomeSlider from "../components/HomeSlider"
 
 // Container wrapper
 import Container from "../components/Container"
+import services from "../lib/services"
 
 const Home = () => {
   const [ filterTag, setFilterTag ] = useState<string>('painting')
@@ -68,7 +69,7 @@ const Home = () => {
             <HomeSlider {...slide}/>
           </SwiperSlide>
         ))}
-          <div slot="container-end" className="flex justify-center content-end gap-x-4 absolute bottom-20 right-20 text-neutral-100 text-xl z-50">
+          <div slot="container-end" className="inset-x-0 flex sm:justify-end justify-between content-end gap-x-4 absolute bottom-20 container text-neutral-100 text-xl z-50">
             <div className="p-3 border bg-transparent border-neutral-200 hover:bg-orange-500 cursor-pointer" onClick={()=>homeSliderRef.current?.slidePrev()}>
               <FaAngleLeft/>
             </div>
@@ -78,8 +79,8 @@ const Home = () => {
           </div>
       </Swiper>
 
-      <Container innerClasses="container flex gap-x-20 lg:flex-row flex-col">
-        <div className="flex-1 bg-neutral-900 text-white p-8 z-20 rounded">
+      <Container sectionClasses="py-0 pb-20" innerClasses="container flex gap-x-20 lg:flex-row flex-col">
+        <div className="-mt-8 flex-1 bg-neutral-900 text-white p-8 z-20 rounded">
             <h2 className="mb-12 text-3xl font-bold relative before:absolute before:w-16 before:h-0.5 before:-bottom-5 before:bg-orange-400 after:absolute after:w-20 after:h-1 after:bg-orange-400 after:-bottom-7 after:left-0">Welcome to Decorators</h2>
             <h3 className="text-2xl font-bold mb-12">We Have The Right Products to Fit Your Needs and Budget <span className="text-orange-500">Purchase - Decorators.</span></h3>
             <p className="mb-8">Explain to you how all this mistaken idea of denouncing ut pleasures work praising pain was born and will give you can complete design account sed the system, and expound the actual teachngs interiors of the great design explorer of the truth, the master-builders design of human happiness one seds rejects, dislikes, or avoids pleasures itself.</p>
@@ -129,66 +130,18 @@ const Home = () => {
             </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="p-6 transition bg-[url(https://images.adsttc.com/media/images/61e8/13e7/c4b6/b501/6400/a8c6/large_jpg/bloco-arquitetos-06.jpg?1642599414)] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-white flex hover:bg-orange-600 gap-x-4 drop-shadow-lg group">
+          {services.map(service => (
+            <div key={service.id} className={`p-6 transition bg-[url(${service.imageUrl})] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-white flex hover:bg-orange-600 gap-x-4 drop-shadow-lg group`}>
               <div className="text-4xl text-white group-hover:bg-white group-hover:text-orange-500 bg-orange-500 w-fit h-fit p-2">
                   <GiPaintRoller/>
               </div>
               <div className="flex flex-col gap-y-4">
-                <h4 className="text-2xl font-bold text-neutral-800 group-hover:text-white">Texture Painting</h4>
-                <p className="text-neutral-600 group-hover:text-white font-normal">How all this mistaken idea pleasure and praising pain was born and will give you a ...</p>
-                <Link to={'/services/texture-painting'} className="uppercase font-bold text-neutral-800 group-hover:text-white">read more</Link>
+                <h4 className="text-2xl font-bold text-neutral-800 group-hover:text-white">{service.service}</h4>
+                <p className="text-neutral-600 group-hover:text-white font-normal">{service.description}</p>
+                <Link to={`/services/${service.id}`} className="uppercase font-bold text-neutral-800 group-hover:text-white">read more</Link>
               </div>
             </div>
-            <div className="p-6 transition bg-[url(https://images.adsttc.com/media/images/61e8/13e7/c4b6/b501/6400/a8c6/large_jpg/bloco-arquitetos-06.jpg?1642599414)] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-white flex hover:bg-orange-600 gap-x-4 drop-shadow-lg group">
-              <div className="text-4xl text-white group-hover:bg-white group-hover:text-orange-500 bg-orange-500 w-fit h-fit p-2">
-                  <GiPaintRoller/>
-              </div>
-              <div className="flex flex-col gap-y-4">
-                <h4 className="text-2xl font-bold text-neutral-800 group-hover:text-white">Texture Painting</h4>
-                <p className="text-neutral-600 group-hover:text-white font-normal">How all this mistaken idea pleasure and praising pain was born and will give you a ...</p>
-                <Link to={'/services/texture-painting'} className="uppercase font-bold text-neutral-800 group-hover:text-white">read more</Link>
-              </div>
-            </div>
-            <div className="p-6 transition bg-[url(https://images.adsttc.com/media/images/61e8/13e7/c4b6/b501/6400/a8c6/large_jpg/bloco-arquitetos-06.jpg?1642599414)] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-white flex hover:bg-orange-600 gap-x-4 drop-shadow-lg group">
-              <div className="text-4xl text-white group-hover:bg-white group-hover:text-orange-500 bg-orange-500 w-fit h-fit p-2">
-                  <GiPaintRoller/>
-              </div>
-              <div className="flex flex-col gap-y-4">
-                <h4 className="text-2xl font-bold text-neutral-800 group-hover:text-white">Texture Painting</h4>
-                <p className="text-neutral-600 group-hover:text-white font-normal">How all this mistaken idea pleasure and praising pain was born and will give you a ...</p>
-                <Link to={'/services/texture-painting'} className="uppercase font-bold text-neutral-800 group-hover:text-white">read more</Link>
-              </div>
-            </div>
-            <div className="p-6 transition bg-[url(https://images.adsttc.com/media/images/61e8/13e7/c4b6/b501/6400/a8c6/large_jpg/bloco-arquitetos-06.jpg?1642599414)] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-white flex hover:bg-orange-600 gap-x-4 drop-shadow-lg group">
-              <div className="text-4xl text-white group-hover:bg-white group-hover:text-orange-500 bg-orange-500 w-fit h-fit p-2">
-                  <GiPaintRoller/>
-              </div>
-              <div className="flex flex-col gap-y-4">
-                <h4 className="text-2xl font-bold text-neutral-800 group-hover:text-white">Texture Painting</h4>
-                <p className="text-neutral-600 group-hover:text-white font-normal">How all this mistaken idea pleasure and praising pain was born and will give you a ...</p>
-                <Link to={'/services/texture-painting'} className="uppercase font-bold text-neutral-800 group-hover:text-white">read more</Link>
-              </div>
-            </div>
-            <div className="p-6 transition bg-[url(https://images.adsttc.com/media/images/61e8/13e7/c4b6/b501/6400/a8c6/large_jpg/bloco-arquitetos-06.jpg?1642599414)] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-white flex hover:bg-orange-600 gap-x-4 drop-shadow-lg group">
-              <div className="text-4xl text-white group-hover:bg-white group-hover:text-orange-500 bg-orange-500 w-fit h-fit p-2">
-                  <GiPaintRoller/>
-              </div>
-              <div className="flex flex-col gap-y-4">
-                <h4 className="text-2xl font-bold text-neutral-800 group-hover:text-white">Texture Painting</h4>
-                <p className="text-neutral-600 group-hover:text-white font-normal">How all this mistaken idea pleasure and praising pain was born and will give you a ...</p>
-                <Link to={'/services/texture-painting'} className="uppercase font-bold text-neutral-800 group-hover:text-white">read more</Link>
-              </div>
-            </div>
-            <div className="p-6 transition bg-[url(https://images.adsttc.com/media/images/61e8/13e7/c4b6/b501/6400/a8c6/large_jpg/bloco-arquitetos-06.jpg?1642599414)] bg-no-repeat bg-center bg-cover bg-blend-overlay bg-white flex hover:bg-orange-600 gap-x-4 drop-shadow-lg group">
-              <div className="text-4xl text-white group-hover:bg-white group-hover:text-orange-500 bg-orange-500 w-fit h-fit p-2">
-                  <GiPaintRoller/>
-              </div>
-              <div className="flex flex-col gap-y-4">
-                <h4 className="text-2xl font-bold text-neutral-800 group-hover:text-white">Texture Painting</h4>
-                <p className="text-neutral-600 group-hover:text-white font-normal">How all this mistaken idea pleasure and praising pain was born and will give you a ...</p>
-                <Link to={'/services/texture-painting'} className="uppercase font-bold text-neutral-800 group-hover:text-white">read more</Link>
-              </div>
-            </div>
+          ))}
         </div>
       </Container>
       <Container sectionClasses="py-24" innerClasses="container text-center">
